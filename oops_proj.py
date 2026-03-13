@@ -1,17 +1,36 @@
 class chatbook:
+
+    __user_id=0
+
     def __init__(self):
+        self.id=chatbook.__user_id
+        chatbook.__user_id+=1
+        self.__name="Default"
         self.username=''
         self.password=''
         self.loggedin=False
-        self.menu()
+        #self.menu()
+    
+    @staticmethod
+    def get_id():
+        return chatbook.__user_id
+    @staticmethod
+    def set_id(val):
+        chatbook.__user_id=val
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self,value):
+        self.__name=value
 
     def menu(self):
         user_input=input("""Welcome To the chatbook!!, 
         How would you like to proceed?
         1.Press 1 to signup
         2.Press 2 to signin
-        3.Press 3 to signin
-        4.Press 4 to message a friend
+        3.Press 3 to post something
+        4.Press 4 to msg a friend                
         5.Press any other key to exit""")    
 
         if user_input=="1":
@@ -19,9 +38,9 @@ class chatbook:
         elif user_input=="2":
             self.signin()
         elif user_input=="3":
-            pass
+            self.my_post()
         elif user_input=="4":
-            pass
+            self.sendmsg()
         else:
             exit()
 
@@ -47,6 +66,25 @@ class chatbook:
                 print("Please input the correct credentials.")
         print("\n")
         self.menu()
-akash=chatbook()        
+
+    def my_post(self):
+        if self.loggedin==True:
+          txt=input("Enter your message here ->")  
+          print(f"Following content has been posted ->{txt}")  
+        else:
+            print("You need to signin first to post something")  
+        print("/n")
+        self.menu()    
+
+    def sendmsg(self):
+        if self.loggedin==True:
+            txt=input("Enter your message here")
+            frnd=input("Where to send the msg? ->")  
+            print(f"Your message has been sent to {frnd}")  
+        else:
+            print("You need to sign in first to post something")  
+        print("\n")
+        self.menu()      
+#akash=chatbook()            
 
      
